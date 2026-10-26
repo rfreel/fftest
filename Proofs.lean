@@ -1,1 +1,1 @@
-import Game.Contract
+import Proofs.Acceptance
