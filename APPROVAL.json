@@ -1,0 +1,13 @@
+{
+  "status": "approved",
+  "authority": "user",
+  "approval_message": "Approve",
+  "approved_commit": "7fcafd5dbf3b67a56e4c31f299e739cffe4f6359",
+  "approved_git_blobs": {
+    "SPEC.md": "36d75e3b5773dabae8152d24e616646b1019f790",
+    "Game/Spec.lean": "008c04503e1767e2132ff2e8c1b2b3cc2fdc8835",
+    "Game/Contract.lean": "b8b2e23fa4a684b019cf32890df1eb115ee0018d"
+  },
+  "factory_decision": 2,
+  "scope": "Freeze the specification and begin implementation under the existing acceptance contract; no additional FFI or axioms."
+}
