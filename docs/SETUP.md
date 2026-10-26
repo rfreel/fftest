@@ -25,3 +25,16 @@ lookup using /proc/self/exe. It changes no Lean code, proof terms or axioms and
 is not part of the target, the FFI allowlist, or the normal installation. CI
 runs on an ordinary Linux host without this shim. This host-specific condition
 must not be confused with a completed independent CI run.
+
+Fresh preparation results:
+
+- Lean builds the draft specification and immutable contract.
+- The factory configuration validates; its full draft gate checks five Lean files.
+- Five harness tests pass. Strategy enumeration and an independent bounded
+  reachability calculation agree on all 22,101 games with at most three states.
+- The full acceptance command rejects the absent implementation as intended.
+- Independent GitHub Actions run 40254339987 passed on an ordinary Linux host.
+- Shell Git has read access but no write credentials on the preparation host.
+  This setup was published through the connected GitHub integration. Future
+  automatic factory pushes require authenticated Git on the controller host;
+  a passing local gate alone does not establish publication to GitHub.

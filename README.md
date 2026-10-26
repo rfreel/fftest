@@ -11,7 +11,8 @@ with soundness and completeness against history-dependent play.
 
 ## Run the factory
 
-Prerequisites: Python 3.11+, git, elan/Lean, and Codex CLI signed in with
+Prerequisites: Python 3.11+, git with authenticated write access to this repo,
+elan/Lean, and Codex CLI signed in with
 `codex login`. No API key or additional model subscription is required by this
 configuration. Existing CLI account usage still applies.
 

@@ -93,7 +93,7 @@ def main():
         raise SystemExit('Port 8787 is already in use')
     tokenfile = controller / 'api-token'
     if not tokenfile.exists():
-        with tokenfile.open('x', opener=lambda path, flags: os.open(path, flags, 0o600)) as f:
+        with open(tokenfile, 'x', opener=lambda path, flags: os.open(path, flags, 0o600)) as f:
             f.write(secrets.token_hex(32))
     env['FF_API_TOKEN'] = tokenfile.read_text().strip()
     with (controller / 'factory.log').open('a') as log:
