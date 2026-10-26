@@ -1,0 +1,7 @@
+.lake/
+*.olean
+*.ilean
+__pycache__/
+.factory/
+.ff/
+.ff_*.lean

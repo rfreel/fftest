@@ -1,0 +1,13 @@
+name = "fftest"
+version = "0.1.0"
+defaultTargets = ["Game", "Proofs"]
+
+[[lean_lib]]
+name = "Game"
+
+[[lean_lib]]
+name = "Proofs"
+
+[[lean_exe]]
+name = "game-solver"
+root = "Main"

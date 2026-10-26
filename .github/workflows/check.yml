@@ -1,0 +1,29 @@
+name: Check specification and harness
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install pinned Lean toolchain
+        run: |
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/v4.1.2/elan-init.sh -o /tmp/elan-init.sh
+          sh /tmp/elan-init.sh -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Check draft or completed solver
+        run: |
+          lean --version
+          python3 -m unittest discover -s tests -v
+          if test -f Game/Solver.lean; then
+            python3 tools/check_contract.py --complete
+            python3 tools/runtime_tests.py --complete
+          else
+            python3 tools/check_contract.py
+            lake env lean Main.lean
+          fi

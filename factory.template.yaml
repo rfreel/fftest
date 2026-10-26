@@ -1,0 +1,108 @@
+project:
+  name: fftest-reachability
+  repo: ${FF_TARGET_REPO}
+  state_dir: ${FF_STATE_DIR}
+  # Existing repository: setup clones and wires origin; no gh CLI required.
+  remote: origin
+  visibility: public
+  main_branch: main
+  language: lean
+  workflow: direct
+
+commands:
+  unit_tests: python3 tools/check_contract.py
+  vectors: python3 -m unittest discover -s tests -v
+  runtime_tests: python3 tools/runtime_tests.py
+
+checker:
+  lean:
+    binary: lake
+    args: [env, lean]
+    files: [Game.lean, 'Game/**/*.lean', Proofs.lean, 'Proofs/**/*.lean', Main.lean]
+    file_timeout_seconds: 120
+    jobs: 2
+    time_in_build: false
+    allowed_axioms: [propext, Classical.choice, Quot.sound]
+    forbid:
+      - '\bsorry\b'
+      - '\badmit\b'
+      - '^\s*axiom\s'
+      - '\bunsafe\b'
+      - '\bpartial\b'
+      - '\bnative_decide\b'
+      - 'implemented_by'
+      - 'debug\.skipKernelTC'
+
+spec:
+  files: [SPEC.md, Game/Spec.lean]
+  immutable:
+    - Game/Contract.lean
+    - lakefile.toml
+    - lean-toolchain
+    - lake-manifest.json
+    - 'tools/**'
+    - 'tests/**'
+    - 'docs/**'
+    - '.github/**'
+    - factory.template.yaml
+    - ff.lock.json
+    - README.md
+
+ffi:
+  allow: []
+  reason: No application FFI or application-specific axioms authorized.
+
+providers:
+  codex:
+    kind: codex
+    binary: ${FF_CODEX_BINARY:-codex}
+    accounts: none
+    sandbox: workspace-write
+
+roles:
+  coordinator: {provider: codex, timeout_minutes: 30}
+  specifier: {provider: codex, timeout_minutes: 45}
+  implementer: {provider: codex, timeout_minutes: 90}
+  auditor_mutation: {provider: codex, timeout_minutes: 30}
+  auditor_crash: {provider: codex, timeout_minutes: 30}
+  auditor_regression: {provider: codex, timeout_minutes: 30}
+  judge: {provider: codex, timeout_minutes: 30}
+  fixer: {provider: codex, timeout_minutes: 90}
+
+loops:
+  specify:
+    enabled: true
+    role: specifier
+    workers: 1
+    max_attempts: 3
+    backlog_command: python3 tools/spec_backlog.py
+    approval: human
+  implement:
+    enabled: true
+    role: implementer
+    workers: 1
+    max_attempts: 3
+    backlog_command: python3 tools/backlog.py
+  optimize: {enabled: false}
+  audit:
+    enabled: true
+    flavors: {mutation: auditor_mutation, crash: auditor_crash, regression: auditor_regression}
+    fixers: 1
+    max_rounds: 3
+    converge_at: high
+    confirm_each_round: false
+
+benchmark:
+  command: python3 tools/bench.py
+  metric: '"seconds":\s*([0-9.]+)'
+  direction: lower
+  repeats: 3
+
+limits:
+  max_parallel_agents: 1
+  nice: 19
+
+gate:
+  cold: true
+  quiet_cpu_pct: 0
+  pause_agents: false
