@@ -1,0 +1,8 @@
+{"agent_move":[],"environment_move":[],"rank":[],"winning":[]}
+{"agent_move":[0],"environment_move":[0],"rank":[0],"winning":[false]}
+{"agent_move":[0],"environment_move":[0],"rank":[0],"winning":[true]}
+{"agent_move":[1,1],"environment_move":[0,1],"rank":[2,0],"winning":[true,true]}
+{"agent_move":[0,1],"environment_move":[0,1],"rank":[0,0],"winning":[false,true]}
+{"agent_move":[1,2,2],"environment_move":[0,2,2],"rank":[3,2,0],"winning":[true,true,true]}
+{"agent_move":[1,0,2],"environment_move":[1,0,2],"rank":[0,0,0],"winning":[false,false,true]}
+{"agent_move":[1,2,2],"environment_move":[1,0,2],"rank":[3,2,0],"winning":[true,true,true]}

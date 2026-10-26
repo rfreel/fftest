@@ -1,0 +1,13 @@
+{
+  "native_mutations": [
+    {
+      "producer": "invalid_zero_rank",
+      "kernel_rejected": true
+    },
+    {
+      "producer": "valid_but_not_exact_rank",
+      "kernel_rejected": true
+    }
+  ],
+  "whole_binary_refinement": "OPEN"
+}

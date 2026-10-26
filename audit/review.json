@@ -21,8 +21,8 @@
   "source_sha256": {
     "Game/Solver.lean": "fab760ab5791bdae395a4e0a0d4f734c90e6d25425937e16a3dbf0670297cbe1",
     "Proofs/Acceptance.lean": "7fcd0184d9a45c903f5ea13ad3d2912f82f7435a149ed7ff7ccc83e212dae8e7",
-    "Main.lean": "3a2ee198c37d88658bba3cded77291160edd4a597a273030e2b1e598a4a48dcf"
+    "Main.lean": "3ebd736153115fdb11d36047d204da78505f166bfb3349b4970f62db5e615949"
   },
   "scope": "One local manual audit round; no claim of exhaustive defect absence or automatic factory audit convergence.",
-  "seconds": 1.8788325939967763
+  "seconds": 1.8319468320005399
 }

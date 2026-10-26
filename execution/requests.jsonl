@@ -1,0 +1,8 @@
+{"n":0,"owner":[],"edges":[],"goals":[]}
+{"n":1,"owner":[true],"edges":[[0]],"goals":[]}
+{"n":1,"owner":[false],"edges":[[0]],"goals":[0]}
+{"n":2,"owner":[true,false],"edges":[[0,1],[1]],"goals":[1]}
+{"n":2,"owner":[false,true],"edges":[[0,1],[1]],"goals":[1]}
+{"n":3,"owner":[true,false,true],"edges":[[0,1],[2],[2]],"goals":[2]}
+{"n":3,"owner":[true,false,true],"edges":[[1],[0,2],[2]],"goals":[2]}
+{"n":3,"owner":[false,true,false],"edges":[[1],[0,2],[2]],"goals":[2]}

@@ -1,0 +1,14 @@
+{
+  "status": "KERNEL_CHECKED_RESPONSES",
+  "whole_binary_refinement": "OPEN",
+  "binary_sha256": "e066eba539b2bd41429bee8362a5ab0aaa6591567e340e6dde375d374f9d2162",
+  "binary_bytes": 122026752,
+  "elf_machine": 62,
+  "requests_sha256": "8601f0348f97e278e37298f62b1c9171925db095727c371ce198bb40cd11ef2b",
+  "request_count": 8,
+  "trusted_binding": "Python captures bytes and translates JSON to Lean literals; this binding is not kernel-proved.",
+  "responses_sha256": "e989ad29cadfc089468d7f6c66879bd8a790a9ad2162a08d51a7b291eab32aac",
+  "witness_sha256": "c901d1a6cf42a805b07bc829d6ae6b426c54836bf41f69ac1f99ba952e93c272",
+  "checked_theorems": 16,
+  "claim": "These captured responses satisfy the game contract and exactly equal solve on these decoded inputs. No all-input machine-code theorem is asserted."
+}
