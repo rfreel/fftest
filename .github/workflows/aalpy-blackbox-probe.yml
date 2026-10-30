@@ -1,0 +1,35 @@
+name: AALpy black-box probe (pinned upstream)
+on:
+  push:
+    branches:
+      - aalpy-blackbox-20261029
+    paths:
+      - research/aalpy_blackbox_probe.py
+      - .github/workflows/aalpy-blackbox-probe.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Checkout isolated research branch
+        uses: actions/checkout@v4
+      - name: Set Python runtime
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Download and install upstream AALpy at pinned revision
+        run: |
+          python -m pip install --disable-pip-version-check "git+https://github.com/DES-Lab/AALpy.git@4c7b4a8746460fd84eaccb48d4891e5e0ac90883"
+          python -m pip show aalpy
+      - name: Learn hidden machines and verify full equivalence
+        run: python research/aalpy_blackbox_probe.py
+      - name: Preserve machine-readable test evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: aalpy-blackbox-evidence
+          path: probe-artifacts/aalpy-probe-results.json
+          if-no-files-found: warn
