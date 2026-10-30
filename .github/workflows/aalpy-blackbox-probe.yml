@@ -24,6 +24,10 @@ jobs:
         run: |
           python -m pip install --disable-pip-version-check "git+https://github.com/DES-Lab/AALpy.git@4c7b4a8746460fd84eaccb48d4891e5e0ac90883"
           python -m pip show aalpy
+      - name: Build pinned AALpy wheel for offline installation
+        run: |
+          mkdir -p probe-artifacts/aalpy-wheel
+          python -m pip wheel --no-deps --wheel-dir probe-artifacts/aalpy-wheel "git+https://github.com/DES-Lab/AALpy.git@4c7b4a8746460fd84eaccb48d4891e5e0ac90883"
       - name: Learn hidden machines and verify full equivalence
         run: python research/aalpy_blackbox_probe.py
       - name: Preserve machine-readable test evidence
@@ -32,4 +36,11 @@ jobs:
         with:
           name: aalpy-blackbox-evidence
           path: probe-artifacts/aalpy-probe-results.json
+          if-no-files-found: warn
+      - name: Preserve offline-installable AALpy wheel
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: aalpy-offline-wheel
+          path: probe-artifacts/aalpy-wheel/*.whl
           if-no-files-found: warn
